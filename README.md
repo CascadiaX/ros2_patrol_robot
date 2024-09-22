@@ -1,3 +1,76 @@
+# Autonomous Inspection Robot Based on ROS2 and Navigation2
+
+[中文版](#中文版) | [English Version](#english-version)
+
+---
+
+## English Version <a name="english-version"></a>
+
+# Autonomous Inspection Robot Based on ROS2 and Navigation2
+## 1. Project Introduction
+This project designs a simulation system for an autonomous inspection robot based on ROS 2 and Navigation 2.
+The inspection robot is capable of moving in a loop between different target points. Upon reaching each target point, it first plays a voice announcement of the arrived target point information, followed by capturing a real-time image through the camera and saving it to the local storage.
+The functions of each package are as follows:
+- fishbot_description: Robot description files, including simulation-related configurations.
+- fishbot_navigation2: Robot navigation configuration files.
+- fishbot_application: Python code for robot navigation applications.
+- fishbot_homework: C++ code for robot navigation applications.
+- autopatrol_interfaces: Interfaces related to autonomous inspection.
+- autopatrol_robot: Functional package for implementing autonomous inspection.
+## 2. Usage Instructions
+The development platform information for this project is as follows:
+- Operating System Version: Ubuntu 22.04
+- ROS Version: ROS2 Humble
+### 2.1 Installation
+This project uses slam-toolbox for mapping, Navigation2 for navigation, Gazebo for simulation, and ros2-control for motion control. Please install the dependencies before building, using the following commands:
+1. Install SLAM and Navigation2
+```bash
+sudo apt install ros-$ROS_DISTRO-nav2-bringup ros-$ROS_DISTRO-slam-toolbox
+```
+2. Install Simulation-related Packages
+```bash
+sudo apt install ros-$ROS_DISTRO-robot-state-publisher ros-$ROS_DISTRO-joint-state-publisher ros-$ROS_DISTRO-gazebo-ros-pkgs ros-$ROS_DISTRO-ros2-controllers ros-$ROS-DISTRO-xacro
+```
+3. Install Speech Synthesis and Image-related Packages
+```bash
+sudo apt install python3-pip -y
+sudo apt install espeak-ng -y
+sudo pip3 install espeakng
+sudo apt install ros-$ROS_DISTRO-tf-transformations
+sudo pip3 install transforms3d
+```
+### 2.2 Running
+After installing the dependencies, you can use the colcon tool to build and run the project.
+Build the packages
+```bash
+colcon build
+```
+Run the simulation
+```bash
+source install/setup.bash
+ros2 launch fishbot_description gazebo.launch.py
+```
+Run the navigation
+```bash
+source install/setup.bash
+ros2 launch fishbot_navigation2 navigation2.launch.py
+```
+Run the autonomous patrol
+```bash
+source install/setup.bash
+ros2 launch autopatrol_robot autopatrol.launch.py
+```
+## 3. Author
+This project references the practice of an autonomous inspection robot from the fishros community and serves as an internship assignment for the author's introduction to ROS2.
+The author has supplemented some of the Python code with C++, as the original tutorial did not provide a C++ version of the waypoint_follower.py. The author has written its C++ version and placed it in the fishbot_homework directory. It has been tested and runs successfully, and it is available for reference and learning.
+The waypoints in the author's code have been modified and can also be adjusted according to the maps provided in the repository as needed.
+Acknowledgments:
+- [fishros](https://github.com/fishros)
+
+---
+
+## 中文版 <a name="中文版"></a>
+
 # 基于ROS2和Navigation2 自动巡检机器人
 
 
